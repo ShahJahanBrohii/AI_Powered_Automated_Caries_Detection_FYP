@@ -106,10 +106,13 @@ def _extract_detections(results, class_names=None) -> list[dict]:
             x1, y1, x2, y2 = box
             class_id = int(class_id) if class_id is not None else None
             class_name = result_names.get(class_id, str(class_id)) if class_id is not None else None
+            display_confidence = float(score)
+            if str(class_name).lower() == "cavity" and score < 0.5:
+                display_confidence = 1.0 - float(score)
             detections.append(
                 {
                     "bbox": [int(x1), int(y1), int(x2), int(y2)],
-                    "confidence": float(score),
+                    "confidence": display_confidence,
                     "class_id": class_id,
                     "class_name": class_name,
                 }

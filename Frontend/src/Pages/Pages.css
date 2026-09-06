@@ -908,6 +908,8 @@ html {
 .report-details-page {
   min-height: 100vh;
   background: #f5f7fa;
+  position: relative;
+  z-index: 1;
 }
 
 .report-details-container {
